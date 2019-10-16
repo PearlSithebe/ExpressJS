@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8" />
+  
+    <style>
+    body {
+        background-color: rgb(95, 184, 184);
+    }
+    .ArtistList {
+        position: absolute;
+        padding-top: 50px;
+        border: 3px solid rgb(39, 37, 37);
+        height: 70%;
+        width: 25%;
+        padding-left: 70px;
+    }
+    form{
+        margin-top: 20px;
+      }
+      #musician{
+        margin-top: 75px !important
+      }
+      
+      button{
+        font-size: 20px;
+        width:150px;
+        height: 50px;
+      }
+      #Edit, #Add, #Delete, #Save, input {
+        margin-left: 15px;
+      }
+      
+      input{
+        width: 550px;
+        height: 50px;
+      }
+      
+      #Musician-name{
+        margin-bottom: 15px;
+        margin-top: 60px;
+      }
+    .PlayerList {
+        right : 0px;
+        padding-right: 300px;
+        position: absolute;
+        padding-top: 10px;
+    }
+    .sortbtn {
+        margin-top: 35%;
+        align-self: center;
+        position: absolute;
+        padding-left: 45%;
+    }
+</style>
+    <body>
+    <div>
+        <h1>Music Player</h1>
+    </div>
+    <div class="ArtistList">
+        <h1>List Of Musicians</h1>
+         <ul id="list">
+         </ul>
+    </div>
+
+    <div class="PlayerList">
+    <form action="/add" method="POST">
+        
+        <input type="text" id="Playlist-name" name="name" placeholder="Musician's name"></input>
+        <br>
+        <input type="text" id="Musician-name" name="song" placeholder="Name of the song"></input>
+    <br></br>
+    <button id="Add">Add</button>
+    </form>
+    
+    <form action="/edit" method="POST">
+    <input type="text" id="Playlist-name" placeholder="ID of the musician"  style="width: 170px;"></input>
+    <input type="text" id="Playlist-name" name="name" placeholder="Musician's name"  style="width: 170px;"></input>
+        <input type="text" id="Musician-name" name="song" placeholder="Name of the song" style="width: 170px;"></input>
+    <button id="Save">Edit</button>
+    </form> 
+  
+    <form action="/delete" method="POST">
+    <input type="text" id="Playlist-name" name="id" placeholder="ID of the musician you want to delete"></input>
+    <button id="Delete">Delete</button>
+    </form>
+    <form id="musician">
+</form>
+</div>
+<form>
+<div class="sortbtn">
+    <button>Sort List</button>
+</div>
+</form>
+<script>
+      const fetching = async ()=>{
+        const request = await fetch("http://localhost:3090/api ", {method:"POST"})
+        const response = await request.json();
+            for(var i = 0; i< response.length;i++){
+                document.getElementById("list").textContent = response;  
+            }
+      }
+      fetching()
+</script>
+</body>
+</html>

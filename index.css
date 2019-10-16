@@ -1,0 +1,48 @@
+body {
+    background-color: rgb(95, 184, 184);
+}
+.ArtistList {
+    position: absolute;
+    padding-top: 50px;
+    border: 3px solid rgb(39, 37, 37);
+    height: 70%;
+    width: 25%;
+    padding-left: 70px;
+}
+form{
+    margin-top: 20px;
+  }
+  #musician{
+    margin-top: 75px !important
+  }
+  
+  button{
+    font-size: 20px;
+    width:150px;
+    height: 50px;
+  }
+  #Edit, #Add, #Delete, #Save, input {
+    margin-left: 15px;
+  }
+  
+  input{
+    width: 550px;
+    height: 50px;
+  }
+  
+  #Musician-name{
+    margin-bottom: 15px;
+    margin-top: 60px;
+  }
+.PlayerList {
+    right : 0px;
+    padding-right: 300px;
+    position: absolute;
+    padding-top: 10px;
+}
+.sortbtn {
+    margin-top: 35%;
+    align-self: center;
+    position: absolute;
+    padding-left: 45%;
+}
