@@ -3,12 +3,12 @@ const app = express();
 const fs = require('fs');
 const data = fs.readFileSync("./database.json")
 const musicians = JSON.parse(data);
-
+const jsonfile = require('jsonfile')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.sendFile(`${__dirname}/index.html`));
-// app.get("/", (req, res) => res.sendFile(`${__dirname}/database.js`));
+
 
 //listen on port 3090
 app.listen(3090, () => console.log("listening on port 3090"));
@@ -24,15 +24,7 @@ app.post('/api', (req, res) => {
         
 })
 
-
-
-// //get all data
-// app.get("/get/", (req, res) => {
-//   res.send(musicians);
-// });
-
 // Create a new Musician
-
 app.post("/add", (req, res) => {
   const newMusician = {
     id: musicians.length + 1,
@@ -51,23 +43,25 @@ res.redirect('/')
 });
 
 // Update a Musician
-app.post("/edit", (req, res) => {
-  const Selected = musicians.some(Musician => Musician.id === parseInt(req.body.id));
+app.post("/:edit", (req, res) => {
+  let id = req.body.id;
+  let newName = req.body.name;
 
-  if (Selected) {
-    const UpdateMusician = req.body;
-    musicians.forEach(Musician => {
-      if (musician.id === parseInt(req.body.id)) {
-        musician.name = UpdateMusician.name
-          ? UpdateMusician.name
-          : Musician.name;
-          
-        res.json({ msg: "Musician has been updated", Musician });
-      }
-    });
-  }
-});
+  jsonfile.readFile("./database.json", function(err,obj) {
+      let newObj = obj;
 
+      newObj[id].name = newName;
+      
+      jsonfile.writeFile("./database.json", newObj, function(err) {
+        if(err){
+           throw err;
+        }
+      })
+  })
+  
+
+
+  });
 // Delete a  Musician
 app.post("/delete", (req, res) => {
   const Selected = musicians.some(Musician => Musician.id === parseInt(req.body.id));
