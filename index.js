@@ -1,9 +1,13 @@
 const express = require("express");
 const app = express();
+const musician = require('./database.js')
 const fs = require('fs');
-const data = fs.readFileSync("./database.json")
+const data = fs.readFileSync("./database.js")
 const musicians = JSON.parse(data);
 const jsonfile = require('jsonfile')
+const bodyparser = require('body-parser')
+
+app.use(bodyparser.json(musician))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -16,11 +20,11 @@ app.listen(3090, () => console.log("listening on port 3090"));
 
 app.post('/api', (req, res) => {
   let music = [];
-        let musicArray = fs.readFileSync(musicians)
-        for(i < 0; i < musicArray.length; i++) {
-          musicArray[i].push(music)
-        }
-        res.send(music);
+  let name = req.body.name;
+  let song = req.body.song;
+  let id = req.body.id;
+  music.push(name,song,id);
+  res.json(music);
         
 })
 
@@ -75,8 +79,8 @@ app.post("/delete", (req, res) => {
   
 });
 
-//sort
-// app.get("/", (req, res) => {
-//   musicians.sort(() => (musician[i].name > musician[i+1].name ? 1 : -1));
-//   res.json(musicians);
-// });
+sort
+app.get("/sort", (req, res) => {
+  musicians.sort((a,b) => (musician[a].name > musician[b].name ? 1 : -1));
+  res.json(musicians);
+});

@@ -11,5 +11,13 @@
     "express": "^4.17.1"
   },
   "devDependencies": {},
-  "description": ""
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PearlSithebe/ExpressJS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PearlSithebe/ExpressJS/issues"
+  },
+  "homepage": "https://github.com/PearlSithebe/ExpressJS#readme"
 }
