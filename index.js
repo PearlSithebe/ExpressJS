@@ -17,17 +17,6 @@ app.get("/", (req, res) => res.sendFile(`${__dirname}/index.html`));
 //listen on port 3090
 app.listen(3090, () => console.log("listening on port 3090"));
 
-
-app.post('/api', (req, res) => {
-  let music = [];
-  let name = req.body.name;
-  let song = req.body.song;
-  let id = req.body.id;
-  music.push(name,song,id);
-  res.json(music);
-        
-})
-
 // Create a new Musician
 app.post("/add", (req, res) => {
   const newMusician = {
@@ -37,14 +26,24 @@ app.post("/add", (req, res) => {
   };
   musicians.push(newMusician);
   console.log(musicians)
-  res.json(musicians);
-  var s = JSON.stringify(musicians);
+  res.json(musicians);4
+  let s = JSON.stringify(musicians);
   fs.writeFile('database.json', s, function(){
 
   })
 res.redirect('/')
   
 });
+// post to the front end
+app.post('/api', (req, res) => {
+   let music = [];
+   for(let i = 0; i < musicians.length ; i++) {
+    JSON.parse(musicians[i])
+     music.push(musician[i])
+   }
+  res.json(music);
+        
+})
 
 // Update a Musician
 app.post("/:edit", (req, res) => {
@@ -79,7 +78,7 @@ app.post("/delete", (req, res) => {
   
 });
 
-sort
+//sort
 app.get("/sort", (req, res) => {
   musicians.sort((a,b) => (musician[a].name > musician[b].name ? 1 : -1));
   res.json(musicians);
